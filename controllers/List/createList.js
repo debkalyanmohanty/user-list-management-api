@@ -1,6 +1,5 @@
 const List = require('../../models/list');
 const User = require('../../models/user');
-const csvParser = require('../../utility/csvParser');
 
 exports.createList = async (req, res) => {
     try {
