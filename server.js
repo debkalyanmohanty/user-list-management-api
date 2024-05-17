@@ -17,27 +17,6 @@ app.use(express.static("./uploads"));
 app.use('/api', routes);
 
 
-app.get('/create-list', (req, res) => {
-    res.render('create-list');
-});
-
-app.get('/upload-csv', async (req, res) => {
-    const List = require('./models/list');
-    const lists = await List.find();
-    res.render('upload-csv', { lists });
-});
-app.get('/send-email', async (req, res) => {
-    const List = require('./models/list');
-    try {
-        const lists = await List.find();
-        res.render('send-email', { lists });
-    } catch (err) {
-        res.status(500).json({ error: 'Failed to load lists' });
-    }
-});
-app.get('/unsubscribe-success', (req, res) => {
-    res.render('unsubscribe-success');
-});
 app.get('/', (req, res) => {
     res.send('Welcome To User List Management API');
 });
