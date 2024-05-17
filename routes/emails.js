@@ -5,6 +5,6 @@ const unsubscriveEmailController = require('../controllers/Emails/unsubscribe');
 const router = express.Router();
 
 router.post('/:listId/sendEmail', sendEmailController.sendEmail);
-router.post('/unsubscribe/:id', unsubscriveEmailController.unsubscribe);
+router.get('/unsubscribe/:id', unsubscriveEmailController.unsubscribe);
 
 module.exports = router;
