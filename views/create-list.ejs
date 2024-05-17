@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create List</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>Create a New List</h1>
+    <form action="/api/list/create" method="post">
+        <label for="title">List Title:</label>
+        <input type="text" id="title" name="title" required>
+
+        <h3>Custom Properties</h3>
+        <div id="properties">
+            <div class="property">
+                <label for="propTitle1">Property Title:</label>
+                <input type="text" id="propTitle1" name="properties[0][title]" required>
+                <label for="fallbackValue1">Fallback Value:</label>
+                <input type="text" id="fallbackValue1" name="properties[0][fallbackValue]" required>
+            </div>
+        </div>
+        <button type="button" onclick="addProperty()">Add Another Property</button>
+
+        <button type="submit">Create List</button>
+    </form>
+
+    <script>
+        let propCount = 1;
+        function addProperty() {
+            propCount++;
+            const newProperty = document.createElement('div');
+            newProperty.className = 'property';
+            newProperty.innerHTML = `
+                <label for="propTitle${propCount}">Property Title:</label>
+                <input type="text" id="propTitle${propCount}" name="properties[${propCount - 1}][title]" required>
+                <label for="fallbackValue${propCount}">Fallback Value:</label>
+                <input type="text" id="fallbackValue${propCount}" name="properties[${propCount - 1}][fallbackValue]" required>
+            `;
+            document.getElementById('properties').appendChild(newProperty);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload CSV</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>Upload CSV to a List</h1>
+    <form id="uploadForm" action="/api/list/:listId/addUsers" method="post" enctype="multipart/form-data">
+        <label for="listId">Select List:</label>
+        <select id="listId" name="listId" required>
+            <% lists.forEach(function(list) { %>
+                <option value="<%= list._id %>"><%= list.title %></option>
+            <% }); %>
+        </select>
+
+        <label for="csv">Upload CSV:</label>
+        <input type="file" id="csv" name="csv" accept=".csv" required>
+
+        <button type="submit">Upload</button>
+    </form>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const selectedListId = document.getElementById('listId').value;
+            const formAction = `/api/list/${selectedListId}/addUsers`;
+            this.action = formAction;
+            this.submit();
+        });
+    </script>
+</body>
+</html>
